@@ -1,0 +1,77 @@
+#!/bin/bash
+##########################################################
+#
+#  Copyright (c) 2014, Oracle. All rights reserved
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# firstboot: Invokes the oracle-ebs-server-R12-preinstall-firstboot checkboot 
+#            function if it hasn't been run before
+#
+# Copyright (C) 2016 Oracle. All rights reserved.
+#
+# chkconfig: 2345 99 95 
+#
+# description:oracle-ebs-server-R12-preinstall-firstboot runs to modify boot parameters
+#
+# Source function library.
+. /etc/init.d/functions
+
+# Check for root
+[ `id -u` = 0 ] || exit 4
+
+FILENAME=/etc/sysconfig/oracle-ebs-server-R12-preinstall/oracle-ebs-server-R12-preinstall.conf;
+PRE_PARAM_LOG=/var/log/oracle-ebs-server-R12-preinstall/results/orakernel.log;
+LOCKFILE=/var/lock/subsys/oracle-ebs-server-R12-preinstall;
+
+case "$1" in
+ start)
+	[ -f "$LOCKFILE" ] && exit 0
+
+	if [ -f "$FILENAME" ] && /bin/grep -q '^RUN_EBS_R12_PREINSTALL=NO' "$FILENAME"; then
+		action=skip
+	else
+		action=run	
+        fi
+
+	[ $action = skip ] && exit 0
+
+	if [ $action = run ]; then
+		/usr/bin/oracle-ebs-server-R12-preinstall-verify -b 2> /dev/null 1>&2
+		RETVAL="$?"
+	fi
+		        
+	if [ "$RETVAL" -eq 0 ]; then
+	        echo "Altered Boot file.  Will be effected on next reboot" >> ${PRE_PARAM_LOG}
+		action "" /bin/true
+        else
+		echo "Boot file modifications failed" >> ${PRE_PARAM_LOG}
+		action "" /bin/false
+        fi
+
+	/bin/touch $LOCKFILE
+
+        ;;
+ stop)
+	/bin/rm -f $LOCKFILE
+   ;;
+
+ *)
+   echo $"Usage: $0 {start|stop}"
+   RETVAL=1
+esac
+	
+exit $RETVAL
+

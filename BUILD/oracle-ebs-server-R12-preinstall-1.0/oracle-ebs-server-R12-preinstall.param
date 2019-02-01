@@ -1,0 +1,126 @@
+##########################################################
+#
+#  Copyright (c) 2014, Oracle. All rights reserved
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# Oracle ebs-server R12 Parameter config file
+#Kernel parameters
+#category:arch:kernel:distribution:parameter:recommended-value
+
+kernelcomment:
+kernelcomment:oracle-ebs-server-R12-preinstall setting for fs.file-max is 6815744
+kernel:*:*:*:fs.file-max:6815744
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.sem is '256 32000 100 142'
+kernel:*:*:*:kernel.sem:256 32000 100 142
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.shmmni is 4096
+kernel:*:*:*:kernel.shmmni:4096
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.shmall is 1073741824 on x86_64
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.shmall is 2097152 on i386
+kernel:*:*:*:kernel.shmall:1073741824
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.shmmax is 4398046511104 on x86_64 
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.shmmax is 4294967295 on i386
+kernel:*:*:*:kernel.shmmax:4398046511104
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.panic_on_oops is 1 
+kernel:*:*:*:kernel.panic_on_oops:1
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for kernel.msgmni is 2878
+kernel:*:*:*:kernel.msgmni:2878
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.core.rmem_default is 262144
+kernel:*:*:*:net.core.rmem_default:262144
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.core.rmem_max is 4194304
+kernel:*:*:*:net.core.rmem_max:4194304
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.core.wmem_default is 262144
+kernel:*:*:*:net.core.wmem_default:262144
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.ipv4.conf.all.rp_filter is 2
+kernel:*:*:*:net.ipv4.conf.all.rp_filter:2
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.ipv4.conf.default.rp_filter is 2
+kernel:*:*:*:net.ipv4.conf.default.rp_filter:2
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.core.wmem_max is 1048576
+kernel:*:*:*:net.core.wmem_max:1048576
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for fs.aio-max-nr is 1048576
+kernel:*:*:*:fs.aio-max-nr:1048576
+kernelcomment:
+
+kernelcomment:oracle-ebs-server-R12-preinstall setting for net.ipv4.ip_local_port_range is 9000 65500
+kernel:*:*:*:net.ipv4.ip_local_port_range:9000 65500
+kernelcomment:
+
+
+#Oracle OS User limits (domain=oracle/*)
+#category:arch:kernel:distribution:type:item:recommended-value
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for nofile soft limit is 4096
+user:*:*:*:soft:nofile:4096
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for nofile hard limit is 65536
+user:*:*:*:hard:nofile:65536 
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for nproc soft limit is 16384 
+usercomment:*:refer orabug15971421 for more info.
+user:*:*:*:soft:nproc:16384 
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for nproc hard limit is 16384
+user:*:*:*:hard:nproc:16384
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for stack soft limit is 10240KB
+user:*:*:*:soft:stack:10240
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for stack hard limit is 32768KB
+user:*:*:*:hard:stack:32768
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for memlock hard limit is maximum of 128GB for x86_64 OR 90percent of RAM
+user:*:*:*:hard:memlock:134217728
+
+usercomment:
+usercomment:*:oracle-ebs-server-R12-preinstall setting for memlock soft limit is maximum of 128GB for x86_64 OR 90percent of RAM
+user:*:*:*:soft:memlock:134217728
+
+#Kernel boot parameters
+#category:arch:processor:kernel:distribution:parameter:recommended-value
+boot:x86_64:*:*:*:numa:off
+boot:*:*:*:*:transparent_hugepage:never
