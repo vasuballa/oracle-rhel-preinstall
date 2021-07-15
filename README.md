@@ -27,3 +27,7 @@ $ vi ~/rpmbuild/SPECS/oracle-ebs-server-R12-preinstall.spec
 $ rpmbuild -ba ~/rpmbuild/SPECS/oracle-ebs-server-R12-preinstall.spec
 $ ls -ltr /home/oracle/rpmbuild/RPMS/x86_64/oracle-ebs-server-R12-preinstall-1.0-3.rhel7.x86_64.rpm
 ```
+
+## Any missing dependency rpms can be downloaded from below OL7 Addon repo url
+
+https://yum.oracle.com/repo/OracleLinux/OL7/addons/x86_64/index.html
